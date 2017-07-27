@@ -7,6 +7,7 @@ import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
+import org.apache.shiro.util.ThreadContext;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,5 +40,7 @@ public class IniTest {
 
         //6、退出
         subject.logout();
+        ThreadContext.unbindSubject();
+        ThreadContext.unbindSecurityManager();
     }
 }

@@ -8,6 +8,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ThreadContext;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,7 +27,6 @@ public class JdbcRealmTest {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
         dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/shiro_test?useSSL=false");
         dataSource.setUser("root");
-        dataSource.setPassword("root");
         dataSource.setDriverClass(Driver.class.getName());
         jdbcRealm.setDataSource(dataSource);
         securityManager.setRealm(jdbcRealm);
@@ -41,5 +41,7 @@ public class JdbcRealmTest {
         }
         Assert.assertEquals(true, subject.isAuthenticated());
         subject.logout();
+        ThreadContext.unbindSubject();
+        ThreadContext.unbindSecurityManager();
     }
 }

@@ -10,6 +10,7 @@ import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
+import org.apache.shiro.util.ThreadContext;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -45,7 +46,8 @@ public class MyFirstRealmTest {
 
         //6、退出
         subject.logout();
-
+        ThreadContext.unbindSubject();
+        ThreadContext.unbindSecurityManager();
     }
 
     @Test
@@ -53,7 +55,7 @@ public class MyFirstRealmTest {
         SecurityManager securityManager = new DefaultSecurityManager(new MyFirstRealm());
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken("zhang", "123");
+        UsernamePasswordToken token = new UsernamePasswordToken("liao", "321");
 
         try {
             subject.login(token);
@@ -62,6 +64,8 @@ public class MyFirstRealmTest {
 
         Assert.assertEquals(true, subject.isAuthenticated()); //断言用户已经登录
         subject.logout();
+        ThreadContext.unbindSubject();
+        ThreadContext.unbindSecurityManager();
     }
 
     @Test
@@ -88,6 +92,8 @@ public class MyFirstRealmTest {
             Assert.assertEquals(true, subject.isAuthenticated()); //断言用户已经登录
             subject.logout();
         }
+        ThreadContext.unbindSubject();
+        ThreadContext.unbindSecurityManager();
     }
 
 }

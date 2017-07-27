@@ -5,6 +5,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ThreadContext;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +26,13 @@ public class PermissionStrTest {
         SecurityUtils.setSecurityManager(securityManager);
         subject = SecurityUtils.getSubject();
     }
+
+    @After
+    public void tearDown(){
+        ThreadContext.unbindSubject();
+        ThreadContext.unbindSecurityManager();
+    }
+
 
     @Test
     public void testSimply() {
