@@ -24,8 +24,9 @@ public class JdbcRealmTest {
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
         JdbcRealm jdbcRealm = new JdbcRealm();
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
-        dataSource.setUser("root");
         dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/shiro_test?useSSL=false");
+        dataSource.setUser("root");
+        dataSource.setPassword("root");
         dataSource.setDriverClass(Driver.class.getName());
         jdbcRealm.setDataSource(dataSource);
         securityManager.setRealm(jdbcRealm);

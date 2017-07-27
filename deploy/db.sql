@@ -1,0 +1,1 @@
+CREATE DATABASE shiro_test;
