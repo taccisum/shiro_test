@@ -27,8 +27,11 @@ public class IniTest {
         SecurityUtils.setSecurityManager(securityManager);
         //3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
         Subject subject = SecurityUtils.getSubject();
+        Assert.assertNull(subject.getSession(false));
+
         UsernamePasswordToken token = new UsernamePasswordToken("zhang", "123");
 
+        Assert.assertTrue(subject.getPrincipals() == null || subject.getPrincipals().isEmpty());
         try {
             //4、登录，即身份验证
             subject.login(token);
@@ -36,7 +39,11 @@ public class IniTest {
             //5、身份验证失败
         }
 
+        Assert.assertNotNull(subject.getSession(false));
         Assert.assertEquals(true, subject.isAuthenticated()); //断言用户已经登录
+        Assert.assertFalse(subject.getPrincipals().isEmpty());
+        System.out.println(subject.getPrincipal());
+
 
         //6、退出
         subject.logout();
