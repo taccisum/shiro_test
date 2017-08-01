@@ -1,4 +1,4 @@
-package cn.tac.test.shiro;
+package cn.tac.test.shiro.realm;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

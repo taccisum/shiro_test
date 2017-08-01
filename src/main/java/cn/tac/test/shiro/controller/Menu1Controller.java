@@ -1,4 +1,4 @@
-package cn.tac.controller;
+package cn.tac.test.shiro.controller;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;

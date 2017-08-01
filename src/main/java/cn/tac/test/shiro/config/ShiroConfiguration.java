@@ -1,4 +1,4 @@
-package cn.tac.config;
+package cn.tac.test.shiro.config;
 
 import org.apache.shiro.authc.credential.PasswordMatcher;
 import org.apache.shiro.mgt.SecurityManager;

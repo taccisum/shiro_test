@@ -1,4 +1,4 @@
-package cn.tac.config;
+package cn.tac.test.shiro.config;
 
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;

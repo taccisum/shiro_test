@@ -1,4 +1,4 @@
-package cn.tac.controller;
+package cn.tac.test.shiro.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;

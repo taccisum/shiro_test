@@ -6,6 +6,8 @@ import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authc.credential.PasswordMatcher;
 import org.apache.shiro.authc.credential.PasswordService;
+import org.apache.shiro.crypto.hash.DefaultHashService;
+import org.apache.shiro.crypto.hash.format.HexFormat;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.subject.Subject;
@@ -57,6 +59,18 @@ public class CredentialMatcherTest {
         subject.login(token);
         subject.logout();
         ThreadContext.unbindSubject();
+    }
+
+    @Test
+    public void testHashPasswordService() {
+        DefaultPasswordService passwordService = new DefaultPasswordService();
+        DefaultHashService hashService = new DefaultHashService();
+        hashService.setHashIterations(1);
+        hashService.setHashAlgorithmName("MD5");
+        passwordService.setHashService(hashService);
+        passwordService.setHashFormat(new HexFormat());
+        passwordService.setHashFormatFactory(null);
+        System.out.println(passwordService.encryptPassword("123456"));
     }
 
     class MyTestIniRealm extends IniRealm {
